@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+    
+
+	<title>Developer>Operations>Server</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Qyrus</span>
+		</a>
+		<ul class="side-menu top">
+            <li>
+				<a href="developer.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="adddevice.html">
+                    <i class='bx bx-add-to-queue'></i>
+					<span class="text">Add Device</span>
+				</a>
+			</li>
+			<li>
+				<a href="qr.html">
+					<i class='bx bx-qr-scan'></i>
+					<span class="text">QR </span>
+				</a>
+			</li>
+			<li>
+				<a href="logoutdev.html" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+    <!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Holaa....">
+					<button type="submit" class="search-btn"><i class='bx bxs-gift'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="profile">
+				<img src="img/dev2.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+        <main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Add Device</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Qyrus</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Server</a>
+						</li>
+					</ul>
+				</div>
+            </div>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Select Device</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="addmobile.html">Mobiles</a>
+                  <a href="addserver.html">Servers</a>
+                  <a href="addbyod.html">BYOD</a>
+                </div>
+              </div>
+            <div class="container mob-table">
+                <div class="headers">
+                    <h2 class="table-title">Device Farm</h2>
+                    <button class="btn add" onclick="add()">Add Server</button>
+                </div>
+                </table>
+                <div class="table-data">
+                    <div class="order">
+                        <div class="head">
+               <td>           
+                <table class="table table-striped" id="tab">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Current Client</th>
+                            <th>Date Of Purchase</th>
+                            <th>Description</th>
+                            <th>Device ID</th>
+                            <th>IP adresss</th>
+                            <th>Make</th>
+                            <th>Manufacturer</th>
+                            <th>Model</th>
+                            <th>OS</th>
+                            <th>Serial Number</th>
+                            <th>Status</th>
+                            <th>Type Of Device</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="taData"></tbody>
+                   
+                    <tbody class="text-center">
+                    </tbody>
+                </table>
+               </td>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <td>
+                <div class="form-wrapper">
+                    <div class="mobileForm">
+
+                        <div class="group">
+                            <label for="id">id</label>
+                            <input type="text" class="form-control" id="id" disabled="disabled">
+                        </div>
+
+                        <div class="group">
+                            <label for="current_client">Current Client</label>
+                            <input type="text" class="form-control" id="current_client" maxlength="20" >
+                        </div>
+
+                        <div class="group">
+                            <label for="date_of_purchase">Date Of Purchase</label>
+                            <input type="text" class="form-control" id="date_of_purchase" >
+                        </div>
+
+                        <div class="group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description" maxlength="100">
+                        </div>
+
+                        <div class="group">
+                            <label for="device_id">Device ID</label>
+                            <input type="text" class="form-control" id="device_id" maxlength="20">
+                        </div>
+
+                        <div class="group">
+                            <label for="ip_address">IP address</label>
+                            <input type="text" minlength="7" maxlength="15" class="form-control" size="10" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" placeholder="xxx.xxx.xxx.xx" autocomplete="off" id="ip_address">
+                        </div>
+
+                        <div class="group">
+                            <label for="make">Make</label>
+                            <input type="text" class="form-control" id="make" maxlength="4">
+                        </div>
+
+                        <div class="group">
+                            <label for="manufacturer">Manufacturer</label>
+                            <input type="text" class="form-control" id="manufacturer"  maxlength="20">
+                        </div>
+
+                        <div class="group">
+                            <label for="model">Model</label>
+                            <input type="text" class="form-control" id="model"  maxlength="15">
+                        </div>
+
+                        <div class="group">
+                            <label for="os">OS</label>
+                            <input type="text" class="form-control" id="os"  maxlength="15">
+                        </div>
+
+                        <div class="group">
+                            <label for="serial_number">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number"  maxlength="25" >
+                        </div>
+
+                        <div class="group">
+                            <label for="status">Status</label>
+                            <select name="date" class="form-control" id="status">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Damaged">Damaged</option>
+                            </select>
+                        </div>
+            
+                        <div class="group">
+                            <label for="type_of_device">Type of Device</label>
+                            <input type="text" class="form-control" id="type_of_device"  maxlength="25">
+                        </div>
+            
+                        <div class="action">
+                            <button class="btn btn-primary save" onClick="submitForm()">Save Changes</button>
+                            <button class="btn btn-danger cancel">Cancel</button>
+                        </div>
+            
+                    </div>
+                </div>
+            </td>
+        </main>    
+    </section>
+    <script src="apiserver.js"></script>
+</body>
+</html>
+            
+            
+   

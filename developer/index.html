@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Login form for Admin and Developer</title>
+        <link rel="stylesheet" href="style1.css">
+        <title>Logout Developer</title>
+    </head>
+    <body>
+        <div class="hero">
+            <video autoplay loop muted plays-inline class="back-video">
+                <source src="img/video1.mp4" type="video/mp4">
+            </video>
+            <div class="content">
+                <h1>Welcome</h1>
+            </div>
+            <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+            <button type="button" class="toggle-btn" onclick="dlogin()">Admin</button>
+            <button type="button" class="toggle-btn" onclick="alogin()">Developer</button>
+          </div>
+          <form id="alogin" class="input-group" action="admin.html" onsubmit="return login1()">
+
+            <input type="text" class="input-field" id="email" placeholder="User Id" autocomplete="off" required>
+
+            <input type="password" class="input-field" id="pwd1" placeholder="Enter Password"  autocomplete="off" required>
+
+            <input type="checkbox" class="check-box"><span>Remember Password</span>
+
+            <button type="submit" class="submit-btn"  onClick="login1()">Log in</button>
+
+          </form>
+
+          <form id="dlogin" class="input-group" action="index.html" onsubmit="return login2()">
+
+            <input type="text" class="input-field" id="email" placeholder="Developer Id" autocomplete="off" required>
+
+            <input type="password" class="input-field" id ="pwd" placeholder="Enter Password" autocomplete="off" required>
+
+            <input type="checkbox" class="check-box"><span>Remember Password</span>
+
+            <button type="submit" class="submit-btn"  onClick="login2()">Log in</button>
+
+          </form>
+
+
+          </div>
+        </div>
+        <script type="text/javascript">
+
+            function preventBack() {
+
+                window.history.forward();
+
+            }
+
+            setTimeout("preventBack()", 0);
+            window.onunload = function () { null };
+
+        </script>
+        <script src="scr1.js"></script>
+
+    </body>
+</html>

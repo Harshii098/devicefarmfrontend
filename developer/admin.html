@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+    <!--script src="script.js"></script-->
+    <script src="script.js"></script>
+
+	<title>Admin Dashboard</title>
+</head>
+<body>
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text">Qyrus</span>
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="admin.html">
+                <i class='bx bxs-dashboard' ></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="qradmin.html">
+                <i class='bx bx-qr-scan'></i>
+                <span class="text">QR </span>
+            </a>
+        </li>
+        <li>
+            <a href="logoutadmin.html" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section id="content">
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu' ></i>
+        <a href="#" class="nav-link">Categories</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Holaa....">
+                <button type="submit" class="search-btn"><i class='bx bxs-gift'></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" />
+        <label for="switch-mode" ></label>
+        <a href="#" class="notification">
+            <i class='bx bxs-bell' ></i>
+            <span class="num">8</span>
+        </a>
+        <a href="#" class="profile">
+            <img src="img/admin.jpg">
+        </a>
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Admin Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Qyrus</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="admin.html"> Dashboard</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">Select Device</button>
+				<div id="myDropdown" class="dropdown-content">
+				  <a href="adminMobile.html">Mobiles</a>
+				  <a href="adminServer.html">Servers</a>
+				  <a href="adminByod.html">BYOD</a>
+				</div>
+			  </div>
+
+			  <script>
+				totalmobile();
+				var editFormData;
+				var totalmobile
+				function totalmobile(){
+					console.log();
+					fetch("http://l54.184.110.5:8080/mobile/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalmobile = response;
+						console.log("totalmobile",totalmobile);
+						document.getElementById('totalmobile').innerHTML = totalmobile
+					})
+				}
+
+				totalserver();
+				var editFormData;
+				var totalserver
+				function totalserver(){
+					console.log();
+					fetch("http://l54.184.110.5:8080/server/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalserver = response;
+						console.log("totalserver",totalserver);
+						document.getElementById('totalserver').innerHTML = totalserver
+					})
+				}
+
+
+				totalbyod();
+				var editFormData;
+				var totalbyod
+				function totalbyod(){
+					console.log();
+					fetch("http://54.184.110.5:8080/byod/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalbyod = response;
+						console.log("totalbyod",totalbyod);
+						document.getElementById('totalbyod').innerHTML = totalbyod
+					})
+				}
+			</script>
+
+			
+
+              <ul class="box-info">
+				<li>
+					<i class='bx bxs-mobile'></i>
+					
+					<div>
+						<div class="number" id="totalmobile"></div>
+						<div class="cardname">Total Mobile Devices</div>
+					</div>
+						
+				</li>
+				<li>
+					<i class='bx bx-server'></i>
+					<div>
+						<div class="number" id="totalserver"></div>
+						<div class="cardname">Total Server Devices</div>
+					</div>
+				</li>
+				<li>
+					<i class='bx bx-devices'></i>
+		
+					<div>
+						<div class="number" id="totalbyod"></div>
+						<div class="cardname">Total Other Devices</div>
+					</div>
+				</li>
+			</ul>
+			<canvas id="bar-chart" width="400" height="160">
+			</canvas>
+			<script>
+		
+				getData();
+		
+				async function getData() {
+					const response = await fetch('http://54.184.110.5:8080/mobile/report');
+					console.log(response);
+					const data = await response.json();
+					console.log(data);
+					
+		
+					labels = ["active","inactive","damaged"];
+					values = [data[0].active, data[0].inactive, data[0].damaged];
+					console.log(data[0].inactive);
+		
+		
+					new Chart(document.getElementById("bar-chart"), {
+						type: 'bar',
+						data: {
+							labels: labels,
+							datasets: [
+								{
+									
+									backgroundColor: ["#3e95cd",
+													"#8e5ea2",
+													"#3cba9f"],
+									data: values
+								}
+							]
+						},
+						options: {
+							legend: { display: false },
+							title: {
+								display: true,
+								text: ' mobile status'
+							}
+						}
+					});
+		
+				}
+		
+			</script>
+			<div class = 'container'>
+				<div class ='1'>
+
+					<canvas id="pie-chart" width="600" height="160">
+					</canvas>
+					<script>
+				
+						getData();
+				
+						async function getData() {
+							const response = await fetch('http://l54.184.110.5:8080/server/report');
+							console.log(response);
+							const data = await response.json();
+							console.log(data);
+							
+				
+							labels = ["active","inactive","damaged"];
+							values = [data[0].active, data[0].inactive, data[0].damaged];
+							console.log(data[0].inactive);
+				
+				
+							new Chart(document.getElementById("pie-chart"), {
+								type: 'pie',
+								data: {
+									labels: labels,
+									datasets: [
+										{
+											
+											backgroundColor: ["#3e95cd",
+															"#8e5ea2",
+															"#3cba9f"],
+											data: values
+										}
+									]
+								},
+								options: {
+									legend: { display: false },
+									title: {
+										display: true,
+										text: ' server status'
+									}
+								}
+							});
+				
+						}
+				
+					</script>
+
+				</div>
+				<div class= '2'>
+
+					<canvas id="doughnut-chart" width="600" height="160">
+					</canvas>
+					<script>
+				
+						getData();
+				
+						async function getData() {
+							const response = await fetch('http://54.184.110.5:8080/byod/report');
+							console.log(response);
+							const data = await response.json();
+							console.log(data);
+							
+				
+							labels = ["active","inactive","damaged"];
+							values = [data[0].active, data[0].inactive, data[0].damaged];
+							console.log(data[0].inactive);
+				
+				
+							new Chart(document.getElementById("doughnut-chart"), {
+								type: 'doughnut',
+								data: {
+									labels: labels,
+									datasets: [
+										{
+											
+											backgroundColor: ["#3e95cd",
+															"#8e5ea2",
+															"#3cba9f"],
+											data: values
+										}
+									]
+								},
+								options: {
+									legend: { display: false },
+									title: {
+										display: true,
+										text: ' byod status'
+									}
+								}
+							});
+				
+						}
+				
+					</script>
+
+				</div>
+			</div>
+
+			
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js">
+	</script>
+    <script src="script.js"></script>
+	
+</body>
+</html>
+

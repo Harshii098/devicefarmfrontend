@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+	<title>Developer>Operations</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">Qyrus</span>
+		</a>
+		<ul class="side-menu top">
+			<li>
+				<a href="developer.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="adddevice.html">
+					<i class='bx bx-add-to-queue'></i>
+					<span class="text">Add Device</span>
+				</a>
+			</li>
+			<li >
+				<a href="audit.html">
+					<i class='bx bx-book-reader'></i>
+					<span class="text">Audit Log</span>
+				</a>
+			</li>
+			<li>
+				<a href="qr.html">
+					<i class='bx bx-qr-scan'></i>
+					<span class="text">QR </span>
+				</a>
+			</li>
+			<li>
+				<a href="logoutdev.html" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+    <!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Holaa....">
+					<button type="submit" class="search-btn"><i class='bx bxs-gift'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="profile">
+				<img src="img/dev2.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+        <main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Add Device</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Qyrus</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Add Device</a>
+						</li>
+					</ul>
+				</div>
+            </div>
+
+			<div class="dropdown">
+				<button onclick="myFunction()" class="dropbtn">Select Device</button>
+				<div id="myDropdown" class="dropdown-content">
+				  <a href="addmobile.html">Mobiles</a>
+				  <a href="addserver.html">Servers</a>
+				  <a href="addbyod.html">BYOD</a>
+				</div>
+			  </div>
+		</main>
+	</section>
+</body>
+</html>

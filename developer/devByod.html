@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons-->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!--My CSS -->
+	<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+	<title>AdminHub</title>	
+    <script src="script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="DataTables/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" href="DataTables/DataTables-1.12.1/css/jquery.dataTables.min.css">
+	<script>
+
+$(document).ready(function () {
+			var baseurl = "http://localhost:8080/byod";
+    		var xmlhttp = new XMLHttpRequest();
+    		xmlhttp.open("GET",baseurl,true);
+			xmlhttp.onreadystatechange = function(){
+				if(xmlhttp.readyState==4 && xmlhttp.status==200){
+					var mobiles = JSON.parse(xmlhttp.responseText);
+					console.log(mobiles);
+            		$("#table2").DataTable({
+						data:mobiles,
+                		"columns":[
+							{data:"type_of_device"},
+                    		{data:"manufacturer"},
+                    		{data:"make"},
+                    		{data:"model"},
+                    		{data:"os"},
+                    		{data:"date_of_purchase"},
+                    		{data:"current_client"},
+                    		{data:"device_id"},
+                    		{data:"serial_number"},
+                    		{data:"ip_address"},
+                    		{data:"server_connected"},
+                    		{data:"phno"},
+                    		{data:"status"},
+                    		{data:"description"},
+					    ]
+					});
+				}
+			}
+			xmlhttp.send();
+		});
+
+	
+    </script>
+    <title>Developer>Dashboard>Server</title>
+</head>
+<body>
+<!-- SIDEBAR -->
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bxs-smile'></i>
+        <span class="text">Qyrus</span>
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="developer.html">
+                <i class='bx bxs-dashboard' ></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li >
+            <a href="adddevice.html">
+                <i class='bx bx-add-to-queue'></i>
+                <span class="text">Add Device</span>
+            </a>
+        </li>
+        <li>
+            <a href="qr.html">
+                <i class='bx bx-qr-scan'></i>
+                <span class="text">QR </span>
+            </a>
+        </li>
+        <li>
+            <a href="logoutdev.html" class="logout">
+                <i class='bx bxs-log-out-circle' ></i>
+                <span class="text">Logout</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- SIDEBAR -->
+ <!-- CONTENT -->
+ <section id="content">
+    <!-- NAVBAR -->
+    <nav>
+        <i class='bx bx-menu' ></i>
+        <a href="#" class="nav-link">Categories</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Holaa....">
+                <button type="submit" class="search-btn"><i class='bx bxs-gift'></i></button>
+            </div>
+        </form>
+        <input type="checkbox" id="switch-mode" hidden>
+        <label for="switch-mode" class="switch-mode"></label>
+        <a href="#" class="profile">
+            <img src="img/admin.jpg">
+        </a>
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Admin Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Qyrus</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#"> Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">Select Device</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+                        <li>
+                            <a class="active" href="#">BYOD</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn">Select Device</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <a href="devMobile.html">Mobiles</a>
+                  <a href="devServer.html">Servers</a>
+                  <a href="devByod.html">BYOD</a>
+                </div>
+              </div>
+
+              <script>
+				totalmobile();
+				var editFormData;
+				var totalmobile
+				function totalmobile(){
+					console.log();
+					fetch("http://54.184.110.5:8080/mobile/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalmobile = response;
+						console.log("totalmobile",totalmobile);
+						document.getElementById('totalmobile').innerHTML = totalmobile
+					})
+				}
+
+				totalserver();
+				var editFormData;
+				var totalserver
+				function totalserver(){
+					console.log();
+					fetch("http://54.184.110.5:8080/server/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalserver = response;
+						console.log("totalserver",totalserver);
+						document.getElementById('totalserver').innerHTML = totalserver
+					})
+				}
+
+
+				totalbyod();
+				var editFormData;
+				var totalbyod
+				function totalbyod(){
+					console.log();
+					fetch("http://54.184.110.5:8080/byod/total", {
+						method: "GET",
+						mode:"cors",
+					}).then((res) => res.json()).then((response) => {
+						console.log("info",response);
+						editFormData = response;
+						totalbyod = response;
+						console.log("totalbyod",totalbyod);
+						document.getElementById('totalbyod').innerHTML = totalbyod
+					})
+				}
+			</script>
+
+              <ul class="box-info">
+				<li>
+					<i class='bx bxs-mobile'></i>
+					
+					<div>
+						<div class="number" id="totalmobile"></div>
+						<div class="cardname">Total Mobile Devices</div>
+					</div>
+						
+				</li>
+				<li>
+					<i class='bx bx-server'></i>
+					<div>
+						<div class="number" id="totalserver"></div>
+						<div class="cardname">Total Server Devices</div>
+					</div>
+				</li>
+				<li>
+					<i class='bx bx-devices'></i>
+		
+					<div>
+						<div class="number" id="totalbyod"></div>
+						<div class="cardname">Total Other Devices</div>
+					</div>
+				</li>
+			</ul>
+            <br>
+            <br>
+            <table id="table2" class="display" style="width:100%">
+				<thead>
+					<tr>
+						<th>Type of Device</th>
+						<th>Manufacturer</th>
+						<th>Make</th>
+						<th>Model</th>
+						<th>OS</th>
+						<th>Date Of Purchase</th>
+						<th>Current Client</th>
+						<th>DeviceId</th>
+						<th>Serial Number</th>
+						<th>Ip Address</th>
+						<th>Server Connected to</th>
+						<th>Phone Number</th>
+						<th>Status</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Type of Device</th>
+						<th>Manufacturer</th>
+						<th>Make</th>
+						<th>Model</th>
+						<th>OS</th>
+						<th>Date Of Purchase</th>
+						<th>Current Client</th>
+						<th>DeviceId</th>
+						<th>Serial Number</th>
+						<th>Ip Address</th>
+						<th>Server Connected to</th>
+						<th>Phone Number</th>
+						<th>Status</th>
+						<th>Description</th>
+					</tr>
+				</tfoot>
+				
+			</table>
+	
+
+	
+
+	
+	
+</body>
+</html>
+
